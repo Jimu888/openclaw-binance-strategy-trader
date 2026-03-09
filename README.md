@@ -1,6 +1,8 @@
 # 让我们用策略来交易
 
-一个给 OpenClaw 用户使用的金字塔建仓 / 金字塔止盈策略小工具（Binance Spot 限价单）。
+一个让 OpenClaw 用户通过**币安官方 Skills（spot）**使用的可视化「金字塔建仓 / 金字塔止盈」策略小工具（Binance Spot 限价单）。
+
+- 恒定混合策略：即将支持（开发中……）
 
 作者：
 - X：<https://x.com/0xjimumu>
@@ -27,7 +29,14 @@
 npm install
 ```
 
-### 2) 设置 Binance API（永久环境变量，推荐）
+### 2) 安装币安官方 Skills（必需）
+
+本工具下单依赖 **Binance 官方 skills-hub 的 `spot` skill**。
+
+- 安装 skills-hub / spot skill 的方式以你当前 OpenClaw 环境为准（不同部署可能不同）。
+- 如果你已经在 OpenClaw 里能使用 `spot` 技能（现货下单/查询），说明这一项已满足。
+
+### 3) 设置 Binance API（永久环境变量，推荐）
 
 你需要：
 - `BINANCE_API_KEY`
@@ -49,8 +58,30 @@ $env:BINANCE_API_KEY="你的key"
 $env:BINANCE_SECRET_KEY="你的secret"
 ```
 
+#### macOS / Linux（永久写入，bash/zsh）
 
-### 3) 启动本地下单服务（必需）
+把下面内容追加到 `~/.zshrc` 或 `~/.bashrc`：
+
+```bash
+export BINANCE_API_KEY="你的key"
+export BINANCE_SECRET_KEY="你的secret"
+```
+
+然后执行：
+
+```bash
+source ~/.zshrc  # 或 source ~/.bashrc
+```
+
+#### macOS / Linux（仅当前终端临时）
+
+```bash
+export BINANCE_API_KEY="你的key"
+export BINANCE_SECRET_KEY="你的secret"
+```
+
+
+### 4) 启动本地下单服务（必需）
 
 ```bash
 npm run server
@@ -58,7 +89,7 @@ npm run server
 
 默认监听：`http://localhost:3001`
 
-### 4) 启动前端 UI
+### 5) 启动前端 UI
 
 ```bash
 npm start
