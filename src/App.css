@@ -33,10 +33,23 @@ body {
 
 .nav-top-row {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 16px;
+}
+
+.nav-title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1d4ed8;
+  opacity: 0.9;
 }
 
 .strategy-nav h1 {

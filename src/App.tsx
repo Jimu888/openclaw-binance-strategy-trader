@@ -186,7 +186,15 @@ const App: React.FC = () => {
   const [pbConfirmOpen, setPbConfirmOpen] = useState(false);
   const [pbRiskOk, setPbRiskOk] = useState(false);
 
-  const pbScale = 1.4; // 系统决定
+  // 分层系数（越跌越买）
+  // 之前 1.4x 对多数层数会过于陡峭：前几层太小、后几层太大。
+  // 现在改为根据层数自适应：层数越多，系数越接近 1。
+  const pbScale = useMemo(() => {
+    const L = clamp(pbPreviewConfig.levels, 2, 20);
+    // L=5 -> 1.20；L=10 -> 1.10
+    const s = 1 + 1 / L;
+    return clamp(s, 1.08, 1.25);
+  }, [pbPreviewConfig.levels]);
 
   const pbPlan = useMemo(() => {
     const { low, high } = normalizeRange(pbPreviewConfig.lowPrice, pbPreviewConfig.highPrice);
@@ -197,7 +205,7 @@ const App: React.FC = () => {
       lowPrice: low,
       scale: pbScale,
     });
-  }, [pbPreviewConfig]);
+  }, [pbPreviewConfig, pbScale]);
 
   const pbTop3 = pbPlan.slice(0, 3);
 
@@ -228,7 +236,13 @@ const App: React.FC = () => {
   const [tpConfirmOpen, setTpConfirmOpen] = useState(false);
   const [tpRiskOk, setTpRiskOk] = useState(false);
 
-  const tpScale = 1.3; // 系统决定
+  // 分层系数（越涨卖越多）——同样做得更平滑
+  const tpScale = useMemo(() => {
+    const L = clamp(tpPreviewConfig.levels, 2, 20);
+    // L=4 -> 1.25；L=8 -> 1.125
+    const s = 1 + 1 / (L * 0.8);
+    return clamp(s, 1.08, 1.28);
+  }, [tpPreviewConfig.levels]);
 
   const tpPlan = useMemo(() => {
     const { low, high } = normalizeRange(tpPreviewConfig.lowPrice, tpPreviewConfig.highPrice);
@@ -239,7 +253,7 @@ const App: React.FC = () => {
       highPrice: high,
       scale: tpScale,
     });
-  }, [tpPreviewConfig]);
+  }, [tpPreviewConfig, tpScale]);
 
   const tpTop3 = tpPlan.slice(0, 3);
 
@@ -259,7 +273,10 @@ const App: React.FC = () => {
       <div className="dashboard">
         <nav className="strategy-nav">
           <div className="nav-top-row">
-            <h1>让我们用策略来交易</h1>
+            <div className="nav-title">
+              <h1>让我们用策略来交易</h1>
+              <div className="nav-subtitle">使用 OpenClaw + Binance 官方 Skills（spot）搭建</div>
+            </div>
             <div className="nav-author">
               <a href="https://x.com/0xjimumu" target="_blank" rel="noreferrer">
                 几木 @0xjimumu
