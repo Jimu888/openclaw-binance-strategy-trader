@@ -32,7 +32,7 @@
 - 让普通用户也能使用机构/量化团队常用的策略（分层建仓、分层止盈、恒定混合再平衡），不需要写代码也能上手
 - 通过 OpenClaw + Binance Skills 形成“策略工具 + Agent 工作流”的一体化体验
 
-### 4) 支持资产与交易对
+### 4) 支持资产与交易对（以下是当前可视化UI版本支持token，Prompt提示词版本可以支持所有token）
 - Base：BTC / ETH / BNB
 - Quote：默认 USDT，可选 USDC / FDUSD
 
@@ -56,12 +56,6 @@
 - 前端：React（策略输入、分层计算、预览表格、二次确认弹窗）
 - 交易能力：通过 OpenClaw 体系调用 Binance 官方 `spot` skill（下单/查询）
 - 文档：README + SECURITY + ENV.example（指导安全配置与运行）
-
-### 8) 开源地址
-- GitHub：<https://github.com/Jimu888/openclaw-binance-strategy-trader>
-- 作者：几木 @0xjimumu
-  - X：<https://x.com/0xjimumu>
-  - 币安广场：<https://www.binance.com/zh-CN/square/profile/0xjimumu>
 
 ---
 
