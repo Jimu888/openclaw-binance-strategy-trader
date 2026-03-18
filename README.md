@@ -52,6 +52,17 @@
 - 二次确认：风险勾选 + 弹窗确认后才提交挂单
 - 密钥不进入前端：不写入 UI、.env、仓库；详见 SECURITY.md
 
+### 7) 技术实现（简述）
+- 前端：React（策略输入、分层计算、预览表格、二次确认弹窗）
+- 交易能力：通过 OpenClaw 体系调用 Binance 官方 `spot` skill（下单/查询）
+- 文档：README + SECURITY + ENV.example（指导安全配置与运行）
+
+### 8) 开源地址
+- GitHub：<https://github.com/Jimu888/openclaw-binance-strategy-trader>
+- 作者：几木 @0xjimumu
+  - X：<https://x.com/0xjimumu>
+  - 币安广场：<https://www.binance.com/zh-CN/square/profile/0xjimumu>
+
 ---
 
 ## 安装 & 运行（本地）
